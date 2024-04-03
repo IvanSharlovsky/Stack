@@ -2,13 +2,6 @@
 #define STACK_H
 #include <stdlib.h>
 #include <errno.h>
-
-#define START_STACK_SIZE 2
-#define STACK_MULTIPLY_CONST 2
-#define STACK_DIVIDE_CONST 2
-#define STACK_DIVIDE_TRIGGER 4
-
-
 enum stack_errors
 {
     NO_ERRORS = 0,
@@ -18,13 +11,27 @@ enum stack_errors
     CANT_ALLOCATE_MEMORY = 4,
     CANT_REALLOCATE_MEMORY = 4
 };
+
+enum stack_valid_check_message
+{
+    ERROR_IN_CHECK_FUNС = -1,
+    STACK_VALID = 0,
+    STRUCT_CANARIES_INVALID = 1,
+    STACK_CANARIES_INVALID = 2
+};
+
 typedef struct
 {
+    int start_canary_of_struct;
     void* stack_pointer;
     int num_of_elem;
     int size_of_stack;
+    int num_of_alloc_stack_elem;
     int size_of_elem;
+    int offset;
+    int end_canary_of_struct;
 } stack;
+
 int stack_init(stack* new_stack, int size_of_elem);
 int stack_push(stack* my_stack, void* elem);
 int stack_pop(stack* my_stack, void* return_elem);
