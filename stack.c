@@ -162,10 +162,8 @@ int stack_destroy(stack* my_stack)
     my_stack->num_of_alloc_stack_elem = 0;
     my_stack->end_canary_of_struct = 0;
     my_stack->start_canary_of_struct = 0;
-
     return NO_ERRORS;
 }
-
 void print_stack_error(int error_code)
 {
     switch (error_code)
@@ -193,6 +191,28 @@ void print_stack_error(int error_code)
             break;
         default:
             printf("NOT ERROR MESSAGE");
+            break;
+    }
+}
+
+void print_stack_valid_check_message(int message_code)
+{
+    switch (message_code)
+    {
+        case ERROR_IN_CHECK_FUNC:
+            printf("ERROR IN VALIDATION FUNCTION");
+            break;
+        case STACK_VALID:
+            printf("STACK VALID");
+            break;
+        case STRUCT_CANARIES_INVALID:
+            printf("INVALID VALUE OF STRUCT CANARIES");
+            break;
+        case STACK_MEM_CANARIES_INVALID:
+            printf("INVALID VALUE OF STACK MEMORY CANARIES");
+            break;
+        default:
+            printf("NOT VALIDATION FUNCTION MESSAGE");
             break;
     }
 }
