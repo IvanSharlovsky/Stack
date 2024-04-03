@@ -17,10 +17,8 @@ int stack_init(stack* my_stack, int size_of_elem)
     my_stack->num_of_alloc_stack_elem = 0;
     my_stack->end_canary_of_struct = 0;
     my_stack->start_canary_of_struct = 0;
-
     my_stack->num_of_alloc_stack_elem = START_STACK_SIZE;
     my_stack->size_of_stack_mem = 2 * sizeof(canary_stack_mem_value) + START_STACK_SIZE * size_of_elem;
-
     my_stack->offset = sizeof(canary_stack_mem_value);
     my_stack->stack_pointer = malloc(my_stack->size_of_stack_mem);
     assert(my_stack != NULL);
@@ -31,14 +29,10 @@ int stack_init(stack* my_stack, int size_of_elem)
         errno = CANT_ALLOCATE_MEMORY;
         return CANT_ALLOCATE_MEMORY;
     }
-
-
     memcpy(my_stack->stack_pointer, &canary_stack_mem_value, sizeof(canary_stack_mem_value));
     memcpy(my_stack->stack_pointer + my_stack->size_of_stack_mem - sizeof(canary_stack_mem_value), &canary_stack_mem_value,
     sizeof(canary_stack_mem_value));
-
-
-
+    
     if(check_stack_valid(my_stack) != 0)
     {
         errno = INCORRECT_STACK_VALIDATION;
@@ -58,7 +52,6 @@ int check_stack_valid(stack* my_stack)
     {
         return STRUCT_CANARIES_INVALID;
     }
-
     if((memcmp(my_stack->stack_pointer, &canary_stack_mem_value, sizeof(canary_stack_mem_value)) 
     || memcmp(my_stack->stack_pointer + my_stack->size_of_stack_mem - sizeof(canary_stack_mem_value), &canary_stack_mem_value,
     sizeof(canary_stack_mem_value))))
@@ -169,5 +162,37 @@ int stack_destroy(stack* my_stack)
     my_stack->num_of_alloc_stack_elem = 0;
     my_stack->end_canary_of_struct = 0;
     my_stack->start_canary_of_struct = 0;
+
     return NO_ERRORS;
+}
+
+void print_stack_error(int error_code)
+{
+    switch (error_code)
+    {
+        case NO_ERRORS:
+            printf("NO ERRORS");
+            break;
+        case NULL_POINTER_OF_ELEMENT:
+            printf("NULL POINTER OF ELEMENT");
+            break;
+        case NULL_STACK_POINTER:
+            printf("NULL STACK POINTER");
+            break;
+        case NULL_NUM_OF_ELEM_IN_STACK:
+            printf("NULL NUMBERS OF ELEMENTS IN STACK");
+            break;
+        case CANT_ALLOCATE_MEMORY:
+            printf("CANT ALLOCATE MEMORY");
+            break;
+        case CANT_REALLOCATE_MEMORY:
+            printf("CANT REALLOCATE MEMORY");
+            break;
+        case INCORRECT_STACK_VALIDATION:
+            printf("INCORRECT STACK VALIDATION");
+            break;
+        default:
+            printf("NOT ERROR MESSAGE");
+            break;
+    }
 }

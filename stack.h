@@ -1,7 +1,10 @@
 #ifndef STACK_H
 #define STACK_H
+
 #include <stdlib.h>
 #include <errno.h>
+#include <stdio.h>
+
 enum stack_errors
 {
     NO_ERRORS = 0,
@@ -9,8 +12,8 @@ enum stack_errors
     NULL_STACK_POINTER = 2,
     NULL_NUM_OF_ELEM_IN_STACK = 3,
     CANT_ALLOCATE_MEMORY = 4,
-    CANT_REALLOCATE_MEMORY = 4,
-    INCORRECT_STACK_VALIDATION = 5
+    CANT_REALLOCATE_MEMORY = 5,
+    INCORRECT_STACK_VALIDATION = 6
 };
 
 enum stack_valid_check_message
@@ -31,13 +34,9 @@ typedef struct
     int size_of_stack_mem;
     int end_canary_of_struct;
 } stack;
-
 int stack_init(stack* new_stack, int size_of_elem);
-
 int check_stack_valid(stack* my_stack);
-
 int stack_push(stack* my_stack, void* elem);
-
 int stack_pop(stack* my_stack, void* return_elem);
 int stack_destroy(stack* my_stack);
 #endif
