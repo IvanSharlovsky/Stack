@@ -14,6 +14,9 @@ SRCS := $(shell find $(SRC_DIR) -name *.c)
 OBJS := $(addsuffix .o,$(basename $(SRCS)))
 .DEFAULT_GOAL := main
 
+run: main
+	$(BUILD_DIR)/$(APP)
+
 main: _build_dir $(OBJS)
 	$(CC) $(OBJS) $(LFLAGS) -lm -o $(BUILD_DIR)/$(APP)
 
