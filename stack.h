@@ -11,13 +11,12 @@ enum stack_errors
     CANT_ALLOCATE_MEMORY = 4,
     CANT_REALLOCATE_MEMORY = 4
 };
-
 enum stack_valid_check_message
 {
     ERROR_IN_CHECK_FUNC = -1,
     STACK_VALID = 0,
     STRUCT_CANARIES_INVALID = 1,
-    STACK_CANARIES_INVALID = 2
+    STACK_MEM_CANARIES_INVALID = 2
 };
 
 typedef struct
@@ -25,10 +24,10 @@ typedef struct
     int start_canary_of_struct;
     void* stack_pointer;
     int num_of_elem;
-    int size_of_stack;
     int num_of_alloc_stack_elem;
     int size_of_elem;
     int offset;
+    int size_of_stack_mem;
     int end_canary_of_struct;
 } stack;
 
