@@ -9,8 +9,10 @@ enum stack_errors
     NULL_STACK_POINTER = 2,
     NULL_NUM_OF_ELEM_IN_STACK = 3,
     CANT_ALLOCATE_MEMORY = 4,
-    CANT_REALLOCATE_MEMORY = 4
+    CANT_REALLOCATE_MEMORY = 4,
+    INCORRECT_STACK_VALIDATION = 5
 };
+
 enum stack_valid_check_message
 {
     ERROR_IN_CHECK_FUNC = -1,
@@ -18,7 +20,6 @@ enum stack_valid_check_message
     STRUCT_CANARIES_INVALID = 1,
     STACK_MEM_CANARIES_INVALID = 2
 };
-
 typedef struct
 {
     int start_canary_of_struct;
@@ -32,7 +33,11 @@ typedef struct
 } stack;
 
 int stack_init(stack* new_stack, int size_of_elem);
+
+int check_stack_valid(stack* my_stack);
+
 int stack_push(stack* my_stack, void* elem);
+
 int stack_pop(stack* my_stack, void* return_elem);
 int stack_destroy(stack* my_stack);
 #endif
