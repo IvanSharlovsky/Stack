@@ -10,7 +10,7 @@
 
 - ### Print `make run` to run tests
 
-- ### Print `make debug` to build app with debig options
+- ### Print `make debug` to build app with debug options
 
 ### Also you can change CC, CFLAGS, LFLAGS, DEBUG_FLAGS values in command line before or after `make [target]`
 
