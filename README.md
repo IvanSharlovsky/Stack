@@ -2,6 +2,10 @@
 
 ## Education project that implements library for creating and using a stack in `C` and a testing function for it
 
+- ### Implemented main Stack functions: init, push, pop, destroy
+
+- ### Additional functions:check_stack_valid, print_error
+
 ## HOW TO BUILD AND RUN
 
 - ### Open terminal in app directory
